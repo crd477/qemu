@@ -430,7 +430,14 @@ int vhost_set_device_state_fd(struct vhost_dev *dev,
  * Returns 0 when the back-end reports successful state transfer and
  * processing, and -errno when an error occurred somewhere.
  */
+#ifdef CONFIG_VHOST
 int vhost_check_device_state(struct vhost_dev *dev, Error **errp);
+#else
+int vhost_check_device_state(struct vhost_dev *dev, Error **errp)
+{
+    return false;
+}
+#endif
 
 /**
  * vhost_save_backend_state(): High-level function to receive a vhost
@@ -448,7 +455,14 @@ int vhost_check_device_state(struct vhost_dev *dev, Error **errp);
  *
  * Returns 0 on success, and -errno otherwise.
  */
+#ifdef CONFIG_VHOST
 int vhost_save_backend_state(struct vhost_dev *dev, QEMUFile *f, Error **errp);
+#else
+int vhost_save_backend_state(struct vhost_dev *dev, QEMUFile *f, Error **errp)
+{
+    return -ENOSYS;
+}
+#endif
 
 /**
  * vhost_load_backend_state(): High-level function to load a vhost
@@ -465,6 +479,13 @@ int vhost_save_backend_state(struct vhost_dev *dev, QEMUFile *f, Error **errp);
  *
  * Returns 0 on success, and -errno otherwise.
  */
+#ifdef CONFIG_VHOST
 int vhost_load_backend_state(struct vhost_dev *dev, QEMUFile *f, Error **errp);
+#else
+int vhost_load_backend_state(struct vhost_dev *dev, QEMUFile *f, Error **errp)
+{
+    return -ENOSYS;
+}
+#endif
 
 #endif
