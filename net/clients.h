@@ -29,6 +29,9 @@
 int net_init_dump(const Netdev *netdev, const char *name,
                   NetClientState *peer, Error **errp);
 
+int net_init_passt(const Netdev *netdev, const char *name,
+                   NetClientState *peer, Error **errp);
+
 #ifdef CONFIG_SLIRP
 int net_init_slirp(const Netdev *netdev, const char *name,
                    NetClientState *peer, Error **errp);

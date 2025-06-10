@@ -10,6 +10,7 @@ system_ss.add(files(
   'hub.c',
   'net-hmp-cmds.c',
   'net.c',
+  'passt.c',
   'queue.c',
   'socket.c',
   'stream.c',
