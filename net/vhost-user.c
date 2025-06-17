@@ -39,7 +39,7 @@ static struct vhost_net *vhost_user_get_vhost_net(NetClientState *nc)
     return s->vhost_net;
 }
 
-uint64_t vhost_user_get_acked_features(NetClientState *nc)
+static uint64_t vhost_user_get_acked_features(NetClientState *nc)
 {
     NetVhostUserState *s = DO_UPCAST(NetVhostUserState, nc, nc);
     assert(nc->info->type == NET_CLIENT_DRIVER_VHOST_USER);
@@ -240,6 +240,7 @@ static NetClientInfo net_vhost_user_info = {
         .check_peer_type = vhost_user_check_peer_type,
         .is_vhost_user = vhost_user_is_vhost_user,
         .get_vhost_net = vhost_user_get_vhost_net,
+        .get_acked_features = vhost_user_get_acked_features,
 };
 
 static gboolean net_vhost_user_watch(void *do_not_use, GIOCondition cond,
